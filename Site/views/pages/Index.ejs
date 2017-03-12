@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>MOVIEBUFF</title>
+  <% include ../partials/head %>
+  <style>
+	.ellipsis {
+  text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
+}
+  .selectedMovie{
+	background:lightgray;
+  }
+  
+  .watched .backicon{
+    display:inline-block;
+	color:Magenta;
+  }
+  
+  .notWatched .backicon{
+	display:none;
+  }
+  
+  </style>
+  <script>
+  $(document).ready(function(){
+  
+        var watchedMovies = $(".watched background");
+       $("#movieresult").on('click', '.notWatched', function(){
+			$(this).toggleClass('selectedMovie');
+			
+			if($(".selectedMovie").length>0)
+			     $('#markWatched').css('display','inline-block');
+		    else
+               $('#markWatched').css('display','none');  			
+		});
+		});
+  </script>
+</head>
+<body>
+	<header>
+		<% include ../partials/header %>
+		
+	</header>
+  <div id="mainDiv" class="container" style="padding-top:10px" width="100%">
+	<div id="middleMainDiv" ng-app="movieApp" ng-controller="movieController"width="100%">
+	   <form style="margin-left:auto;margin-right:auto;" id="moviesearchform" class="hor-center">
+			<input type="text"  ng-model="movieName" Name="movieName" id="movieName"/></br>
+			<input type="button" ng-click="searchMovie()"  value="Search Movie"/>
+			
+	   </form></br>
+	   
+	   <div id="movieresult" class="container" style="margin-left:auto:margin-right:auto;">
+	        <div style="width:100%;text-align:center;margin-bottom:5px;"><input type="button" class="btn btn-info" ng-click="markMoviesWatched()" style="display:none;" value="mark selected movies as watched" id="markWatched"></div>
+			<!-- <table>
+				<tr ng-repeat = "movie in movies" id="{{movie.title}},{{}}">
+				<td><img height="100" width="70" src="{{ movie.poster }}"/></td>
+				<td>
+					<ul style="list-style-type:none;padding-left:10px">
+						<li>&nbsp;Title : {{movie.title}}</li>
+						<li>&nbsp;Year : {{movie.year}}</li>
+					</ul>
+					</br>
+				</td>
+				</tr>				
+			</table> -->
+			<div  style="width:220px;margin-right:1px;margin-bottom:1px;z-index:1" ng-repeat = "movie in movies" id="{{movie.title}}:{{movie.year}}" class="{{movie.watched}} movieInfo col-md-4 col-sm-6">
+				<div style="float:left;" style="height:120px;width:80px;">
+					<img height="110" width="70" src="{{ movie.poster }}"/>
+					<span class="backicon glyphicon glyphicon-ok-sign lbl lbl-info" style="position:absolute" >Watched</span>
+				</div>
+				<div style="height:120px;width:100px;float:left;" class="ellipsis" title="{{movie.title}}">
+					{{movie.title}}</br>
+					{{movie.year}}
+				</div>
+			</div>
+			 
+	   </div>
+	</div>
+  </div>
+  <script src="content/js/controllers/moviecontroller.js" ></script>
+  <footer>
+		<% include ../partials/footer %>
+  </footer>
+</body>
+
+</html>

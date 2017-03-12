@@ -1,0 +1,150 @@
+﻿    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div id="header">
+        <div id="upHeader" style="width:100%;display:inline-block">
+            <div id="logoDetail" class="col-md-4 col-sm-4 col-xs-12">
+                <div id="logoHome" class="AlignLeft">
+                    <img src="@Url.Content("~/Content/images/logo.gif")" height="115" />
+                </div>
+                <div id="logoHeading" class="AlignLeft">
+                    <ul style="text-align:center">
+                        <li><h4>Public Health</h4></li>
+                        <li><h4>Engineering</h4></li>
+                        <li><h4>Department</h4></li>
+                        <li><h5>Govt. Of Chattisgarh</h5></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="CMDetail" class="col-md-4 col-sm-4 col-xs-12">
+                <div>
+                    <img class="AlignLeft" src="@Url.Content("~/Content/images/RAMAN.jpg")" height="115" />
+                    <div class="AlignLeft" style="display:table;height:120px">
+                        <ul style="display:table-cell;vertical-align:middle">
+                            <li><h5>Dr. Raman Singh</h5></li>
+                            <li><h6>Chief Minister</h6></li>
+                            <li><h6>(Chattisgarh)</h6></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="MinHomeDetail" class="col-md-4 col-sm-4 col-xs-12">
+                <div>
+                    <img class="AlignLeft" src="@Url.Content("~/Content/Images/Ramsewak-Paikra.jpg")" height="115" />
+                    <div class="AlignLeft" style="display:table;height:120px">
+                        <ul style="display:table-cell;vertical-align:middle">
+                            <li><h5>Sh Ramsewak Paikara</h5></li>
+                            <li><h6>Minister Home,</h6></li>
+                            <li><h6>Jail and PHED</h6></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cssmenu">
+            <ul>
+                <li>@Html.ActionLink("Home","Index")</li>
+            @if(EWorks.Security.SessionPersister.Role == "master")
+                    {
+                <li class="current_page_item has-sub">
+                   
+                    <a href="#" accesskey="1" title="">Master</a>
+                    <ul>
+                        @*<li id="stateList">@Html.Partial("_ListView", @ViewBag.SelectListModel as EWorks.Models.SelectListModel)</li>
+                        <li id="zoneList"></li>
+                        <li id="circleList"></li>
+                        <li id="divisionList"></li>
+                        <li id="subDivisionList"></li>*@                        
+                        <li class="has-sub" id="masterHead">
+                            <a href="#">Head</a>
+                            <ul>
+                                <li>@Html.ActionLink("Expenditure Head", "AllocationExpenditureHead", "State")</li>
+                                <li>@Html.ActionLink("Receipt Head","AllocationReceiptHead","State")</li>
+                            </ul>
+                        </li>
+                        <li class="has-sub" id="masterWork">
+                            <a href="#">Work</a>
+                            <ul>
+                                <li>@Html.ActionLink("Budgeted Work","BudgetedWorkMaster","State")</li>
+                                <li>@Html.ActionLink("Non Budgeted Work", "NonBudgetedWorkMaster", "State")</li>
+                                <li>@Html.ActionLink("NRDWP Work", "NRDWP", "State")</li>
+                            </ul>
+                        </li>
+                      
+                    </ul>
+                </li>
+            }
+                <li>
+                    <a class="has-sub" href="#" accesskey="1" title="">Allotment</a>
+                    <ul>
+                        <li>@Html.ActionLink("Allotment General","AllotmentGeneral","State")</li>
+                        <li>@Html.ActionLink("General Allotment other deposit", "AllotmentGeneralOtherDeposit", "State")</li>
+                        <li>@Html.ActionLink("General Allotment SD & Misc", "AllotmentGeneralSD", "State")</li>
+                    </ul>
+                </li>
+                @*<li>
+                    <a class="has-sub" href="#" accesskey="1" title="">Challan Master</a>
+                    <ul>
+                        <li>@Html.ActionLink("Other Chalan","OtherChalan","State")</li>
+                        <li><a href="#">SD & Misc</a></li>
+                    </ul>
+                </li>*@
+                <li><a href="#" accesskey="2" title="">@Html.ActionLink("Update", "UpdateUser", "State")</a></li>
+                @*<li><a href="#" accesskey="3" title="">Edit</a></li>*@
+                <li class="has-sub">
+                    <a href="#" accesskey="4" title="">Report</a>
+                    <ul>
+                        <li>@Html.ActionLink("Allotment and Expenditure","AllotmentAndExpenditureReport")</li>
+                        <li>@Html.ActionLink("NRDWP Report", "NRDWPReport")</li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="#" accesskey="4" title="">Bill Payment</a>
+                    <ul>
+                        <li>@Html.ActionLink("Agreemented", "AgreementedBillPayment")</li>
+                        <li>@Html.ActionLink("Non-Agreemented", "NonAgreementedBillPayment")</li>
+                        <li>@Html.ActionLink("Hand Receipt","HandReceiptPayment")</li>
+                    </ul>
+                </li>
+                <li style="position:absolute; right:3px">
+                    @Html.ActionLink("Logout","LogOut","Account")
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+    <div class="body-content">
+        @RenderBody()       
+    </div>
+    <footer>
+        <p style="margin-bottom:0px">Copyright &copy; 2016 PHED Dept. Govt. of Chattisgarh</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+    
+        $(window).bind('scroll', function () {
+            var height = parseInt($('#cssmenu').css('height'));
+        if ($(window).scrollTop() >= height) {
+            $('#cssmenu').addClass('fixed');
+        } else{
+            $('#cssmenu').removeClass('fixed');
+        }
+        });
+       
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
