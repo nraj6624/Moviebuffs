@@ -1,27 +1,26 @@
  pipeline {
- agent any
- environment {
- LABS = credentials('labcreds')
- }
- stages {
- stage('Build') {
- steps {
- }
- }
- stage('Test') {
- steps {
- }
- }
- stage('Package') {
- steps {
- sh 'zip-r retailproject.zip .'
-}
- }
- stage('Deploy') {
- steps {
- sh 'sshpass-p $LABS_PSW scp-o StrictHostKeyChecking=no-r .
- $LABS_USR@g02.itversity.com:/home/itv005857/retailproject'
- }
- }
- }
+    agent any
+    environment {
+        LABS = credentials('labcreds')
+    }
+    stages {
+        stage('Build') {
+            steps {
+            }
+        }
+        stage('Test') {
+            steps {
+            }
+        }
+        stage('Package') {
+            steps {
+            sh 'zip -r retailproject.zip .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+            sh 'sshpass -p $LABS_PSW scp -o StrictHostKeyChecking=no -r . $LABS_USR@g02.itversity.com:/home/itv005857/retailproject'
+            }
+        }
+    }
  }
