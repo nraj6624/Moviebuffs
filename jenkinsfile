@@ -4,12 +4,7 @@
         LABS = credentials('labcreds')
     }
     stages {
-        stage('Build') {
-          
-        }
-        stage('Test') {
-            
-        }
+       
         stage('Package') {
             steps {
             sh 'zip -r retailproject.zip .'
